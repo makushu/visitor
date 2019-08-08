@@ -1,35 +1,51 @@
-'use strict';
+//counts number of files saved
+var count = 0;
 
-const fs = require('fs');
-
+//Visitor class has constructor, Count, save and load methods
 class Visitor {
-    constructor(fullName, age, dateOfVisit, timeOfVisit, comments, nameOfVIsitee){
-        this.fullName = fullName;
-        this.age = age;
-        this.dateOfVisit = dateOfVisit;
-        this.timeOfVisit = timeOfVisit;
-        this.comments = comments;
-        this.nameOfVIsitee = nameOfVIsitee;
-    }    
+ constructor ( name,surname, date, time, comment, assistant){
+     this.name = name ;
+     this.surname = surname;
+     this.date = date;
+     this.time = time;
+     this.comment = comment
+     this.assistant = assistant;
+ }
 
-    save(){
-        var some_number = 0;
-        let file = JSON.stringify(this,null,2);
+//Count method counts number of files saved
+Count() {
+    count += 1;
+ }
+
+ //save method saves visitor information
+ save() {
+    var fs = require('fs');
+
+   this.Count();
       
+ fs.writeFile("visitor" + count + ".json", `Fullname: ${this.name} ${this.surname} \n Date: ${this.date} \n Time: ${this.time}\n Comment: ${this.comment}\n assistant: ${this.assistant}.`, function (err) {
+    if(err){
+          throw err;
+      }
+  });
+ }
 
-        fs.writeFileSync('visitor_' + some_number+1 + '.json', file);
-        
-        
+ //load method loads visitor information
+ load(a) {
+    var fs = require('fs');
+
+     fs.readFile("./visitor" + a +".json", "utf8",(err, data) => {
+      if (err) throw err;
+      console.log(data);
+    });
     }
 }
 
-  let visitor1 = new Visitor("abc def",12,13,14, "sky is blue","ghi");
- // let visitor2 = new Visitor("jkl mno",15,16,17, "grass is green","pqr");
-
-  visitor1.save();
-//visitor2.save();
-
-
-
-//   let visitor3 = new Visitor("stu vwx",18,19,20, "today is day","yza")
-//   visitor3.save();
+//instances of Visitor class
+var visitor = new Visitor( "arnold", "bake", 12032019,1330, "application enquiry", "carmen");
+var visitor1 = new Visitor( "dolly", "elizabeth", 10062019, 0900, "online test", "felicity");
+var visitor2 = new Visitor( "gerald", "harry", 26072019, 1542, "bootcamp", "innocent");
+visitor.save();
+visitor1.save();
+visitor2.save();
+visitor.load(1);var visitor1 = new Visitor( "dolly", "elizabeth", 10062019, 0900, "online test", "felicity");
