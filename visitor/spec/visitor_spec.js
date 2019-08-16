@@ -1,17 +1,15 @@
+var visitor; 
+Visitor = require('../visitor');
+visitor = new Visitor( "arnold bake", 19, "12032019","1330", "application enquiry", "carmen");
+
+
 describe("Count",function(){
     it("check if Count is defined.", function(){
         expect(visitor.Count()).toBeDefined();
 });
 
 
-describe("Visitor" ,function(){
-    var Visitor;
-   
-    beforeEach(function(){
-        Visitor = require('../visitor');
-        visitor = new Visitor( "arnold bake", 19, "12032019","1330", "application enquiry", "carmen");
-    });
-
+describe("save" ,function(){
 
     it("Check if Visitor is defined", function(){
         expect(visitor).toBeDefined();
@@ -31,6 +29,4 @@ describe("Load",function(){
         expect(result).not.toBe(null);
     }) 
 });
-
-
 });
